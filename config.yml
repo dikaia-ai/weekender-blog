@@ -61,9 +61,9 @@ params:
 
 
     homeInfoParams:
-        Title: "Kyle's Blog"
+        Title: "Welcome!"
         Content: >
-            Welcome! This website is going to act as a dumping ground for things I'm learning or working on.
+            This website is going to act as a dumping ground for things I'm learning or working on.
             Feel free to take a peek
 
     socialIcons:
