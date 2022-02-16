@@ -13,7 +13,7 @@ googleAnalytics: G-06XBWZ9STS
 
 minify:
     disableXML: true
-    # minifyOutput: true
+    minifyOutput: false
 
 languages:
     en:
