@@ -1,7 +1,5 @@
 ---
-title: "Contact"
 layout: "contact"
-summary: "contact"
 showReadingTime: false
 showTOC: false
 ---
