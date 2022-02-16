@@ -1,4 +1,3 @@
-
 [build]
 publish = "public"
-command = "hugo --theme=PaperMod --buildDrafts --gc --minify"
+command = "hugo --theme=PaperMod --buildDrafts --gc"
