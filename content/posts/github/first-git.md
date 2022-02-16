@@ -220,7 +220,7 @@ git config --global credential.help store
             your terminal but this is normal
 
 If you would like to use SSH to connect to repositories, see my other
-post: [Git SSH Integration](https://kmclester.com/post/github/git-ssh/)
+post: [Git SSH Integration](https://kmclester.com/posts/github/git-ssh/)
 
 ## TL;DR
 

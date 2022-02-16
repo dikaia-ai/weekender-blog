@@ -181,7 +181,7 @@ git config --global credential.help store
     - For password, copy / paste the personal access token we created in step 7
         + Since it's a password, you will not see any text appear in your terminal but this is normal
 
-If you would like to use SSH to connect to repositories, see my other post: [Git SSH Integration](https://kmclester.com/post/github/git-ssh/)
+If you would like to use SSH to connect to repositories, see my other post: [Git SSH Integration](https://kmclester.com/posts/github/git-ssh/)
 
 ## TL;DR
 

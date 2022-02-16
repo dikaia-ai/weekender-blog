@@ -39,7 +39,7 @@ with changes to your website and it is required if you would like to
 host your site on a service like [Netlify](https://www.netlify.com/). If
 you do not already know how to use GitHub, please read through my post
 on setting up your [first
-repository](https://kmclester.com/post/github/first-git/)
+repository](https://kmclester.com/posts/github/first-git/)
 
 ### Step 2: Installation
 
