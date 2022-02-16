@@ -1,0 +1,76 @@
+---
+author: Kyle McLester
+categories:
+- Hugo
+date: 2022-02-15
+format: hugo
+title: Creating a Personal Blog Site
+toc-title: Table of contents
+---
+
+## 🚧 UNDER CONSTRUCTION
+
+[Hugo](https://gohugo.io/) is the foundation we will be using to create
+our blog website - it is the framework that this very website is built
+upon. If you are unfamiliar with Hugo, it is a static site generator. A
+static site is a website that does not connect to a backend server - ie,
+the website does not dynamically change and all of the elements are
+fixed in place at the time of render/compilation.
+
+The core of Hugo is built around markdown files. We will see more detail
+on this later but for now just understand that Hugo uses these markdown
+files to render each page or post on our website.
+
+## Creating a Hugo Project
+
+Note: The Hugo
+[documentation](https://gohugo.io/getting-started/quick-start/) goes
+into much more detail than I will be able to here. I am using a macOS
+system so I am unable to definitively explain the install process on
+other operating systems. Once you have the installation completed, all
+of the following steps will be identical, regardless of operating
+system. If you have questions, feel free to reach out using the [contact
+page](https://kmclester.com/contact/) and I will do my best to respond.
+
+### Step 1: Version Control
+
+It is highly recommended to use a version control system for keeping up
+with changes to your website and it is required if you would like to
+host your site on a service like [Netlify](https://www.netlify.com/). If
+you do not already know how to use GitHub, please read through my post
+on setting up your [first
+repository](https://kmclester.com/post/github/first-git/)
+
+### Step 2: Installation
+
+``` bash
+brew install hugo 
+```
+
+To verify your install:
+
+``` bash
+hugo version
+```
+
+### Step 3: Create a New Site
+
+``` bash
+hugo new site my-blog
+```
+
+This command will create a new site folder called `my-blog` in the
+directory from which you ran the script. For example, if we created a
+new website in the `www` folder, the file structure would be:
+
+``` bash
+📂 www
+    📂 my-blog
+        📂 archetypes
+        📂 content
+        📂 layouts
+        📂 themes
+        📂 data
+        📂 static
+        📄 config.toml
+```
