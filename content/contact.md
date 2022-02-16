@@ -2,7 +2,7 @@
 layout: "contact"
 showReadingTime: false
 showTOC: false
-title: Let's Connect
+title: Contact
 ---
 
 | name | email | best time to contact |
