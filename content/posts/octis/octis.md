@@ -4,9 +4,9 @@ bibliography: /Users/kmclester/Documents/my-blog/myblog/static/octis.bib
 categories:
 - Topic Modeling
 date: 2022-02-09
-description: Optimizing and Comparing Topic Models is Simple!
 format: hugo
 jupyter: python3
+summary: Optimizing and Comparing Topic Models is Simple!
 title: Intro to OCTIS
 toc-title: Table of contents
 ---
@@ -247,26 +247,26 @@ print(*list(output.keys()), sep="\n") # Print the output identifiers
 
 <div class="cell-output-display" execution_count="5">
 
-    ['people make good time work system post question thing group',
-     'true belief religion exist make people atheist question point evidence',
-     'sin child give church pray love life time faith make',
-     'game play good year player team run score lead hit',
-     'key system message mail font encryption user block internet algorithm',
-     'government year clipper state make policy chip president people encryption',
-     'file image program include version widget application list window format',
-     'drive problem system work run disk software machine keyboard computer',
-     'driver water speed low fast high run good bus make',
-     'win team lose make season good year king time face',
-     'call sale printer print include offer good delete sell price',
-     'people law make person jewish man give time group case',
-     'gun people drug weapon make good disease time crime criminal',
-     'window program phone work system chip time technology application information',
-     'card bit color work port monitor board video support make',
-     'car time year back make put good price man engine',
-     'book find study write time part read world earth reference',
-     'space launch mission ground system satellite bike orbit solar time',
-     'good make power thing price current test work time read',
-     'people armenian kill fire happen time child leave day start']
+    ['woman son church kill body wife people mother leave start',
+     'government state people law information group issue military make control',
+     'file image program version application include widget system window server',
+     'people make give sin day time man life love good',
+     'list print program port computer printer include work address color',
+     'people religion make thing belief time christian question point church',
+     'car good make price engine mile power buy water sell',
+     'encryption chip clipper key system government technology law year escrow',
+     'time phone people ground happen start make hear leave put',
+     'question drive monitor power system apple post newsgroup answer gay',
+     'game team win play year good player time season make',
+     'drive card disk run work system driver scsi make chip',
+     'drug test patient disease doctor medical study problem good card',
+     'make fire claim people evidence point reason post word case',
+     'window problem work mode run block bit switch button memory',
+     'armenian people turkish year genocide population jewish village greek war',
+     'key mail send number message post info call reply company',
+     'homosexual man sex homosexuality male sexual cap make pen show',
+     'gun law weapon people firearm car good death pay kill',
+     'space launch system cost mission satellite orbit solar make year']
 
 </div>
 
@@ -297,13 +297,13 @@ print(f'Coherence: {str(npmi_score)}')
 
 <div class="cell-output-stdout">
 
-    Topic diversity: 0.695
+    Topic diversity: 0.725
 
 </div>
 
 <div class="cell-output-stdout">
 
-    Coherence: 0.05416221099250135
+    Coherence: 0.07167448455491789
 
 </div>
 

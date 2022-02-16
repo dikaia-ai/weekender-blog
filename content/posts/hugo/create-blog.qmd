@@ -4,9 +4,8 @@ date: 2022-02-15
 format: hugo
 title: Creating a Personal Blog Site
 categories: ['Hugo']
+summary: 🚧  UNDER CONSTRUCTION
 ---
-
-## 🚧 UNDER CONSTRUCTION
 
 [Hugo](https://gohugo.io/) is the foundation we will be using to create our blog website - 
 it is the framework that this very website is built upon. If you are

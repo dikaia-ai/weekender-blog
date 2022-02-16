@@ -4,6 +4,7 @@ date: 2022-02-15
 format: hugo
 title: GitHub SSH
 categories: [GitHub]
+summary: Secure git repo connection with SSH
 ---
 
 You may be accustomed to using your Git project url (https) for cloning and pushing to your Git repo, however you

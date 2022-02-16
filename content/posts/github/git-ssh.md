@@ -4,6 +4,7 @@ categories:
 - GitHub
 date: 2022-02-15
 format: hugo
+summary: Secure git repo connection with SSH
 title: GitHub SSH
 toc-title: Table of contents
 ---

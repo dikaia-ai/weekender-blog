@@ -2,6 +2,7 @@
 author: Kyle McLester
 date: 2022-02-08
 format: hugo
+summary: Integrate Quarto to your Hugo website
 title: How to Quarto
 toc-title: Table of contents
 ---

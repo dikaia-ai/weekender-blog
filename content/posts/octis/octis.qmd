@@ -1,6 +1,6 @@
 ---
 title: Intro to OCTIS
-description: Optimizing and Comparing Topic Models is Simple!
+summary: Optimizing and Comparing Topic Models is Simple!
 date: "2022-02-09"
 author: Kyle McLester
 format: hugo

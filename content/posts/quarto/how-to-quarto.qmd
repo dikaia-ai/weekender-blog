@@ -3,6 +3,7 @@ title: How to Quarto
 date: "2022-02-08"
 format: hugo
 author: Kyle McLester
+summary: Integrate Quarto to your Hugo website
 ---
 
 Head to the **[Get Started](https://quarto.org/docs/getting-started/)** page on Quarto's website and download the latest version of Quarto for your operating system.
