@@ -1,3 +1,8 @@
 [build]
-publish = "public"
-command = "hugo --theme=PaperMod"
+    publish = "public"
+    command = "hugo --theme=PaperMod"
+
+[context.production.environment]
+    HUGO_VERSION = "0.92.2"
+    HUGO_ENV = "production"
+    HUGO_ENABLEGITINFO = "true"
