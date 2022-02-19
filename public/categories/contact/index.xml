@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Contact on Kyle&#39;s Blog</title>
+    <link>https://kmclester.com/categories/contact/</link>
+    <description>Recent content in Contact on Kyle&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://kmclester.com/categories/contact/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Contact</title>
+      <link>https://kmclester.com/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/contact/</guid>
+      <description>Let&amp;rsquo;s Connect!</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Intro to OCTIS | Kyle&#39;s Blog</title>
+<meta name="keywords" content="" />
+<meta name="description" content="Optimizing and Comparing Topic Models is Simple!">
+<meta name="author" content="Kyle McLester">
+<link rel="canonical" href="https://kmclester.com/posts/octis/octis/" />
+<meta name="google-site-verification" content="G-06XBWZ9STS" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://kmclester.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://kmclester.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://kmclester.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://kmclester.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://kmclester.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-06XBWZ9STS"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-06XBWZ9STS', { 'anonymize_ip': false });
+}
+</script>
+<meta property="og:title" content="Intro to OCTIS" />
+<meta property="og:description" content="Optimizing and Comparing Topic Models is Simple!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kmclester.com/posts/octis/octis/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-09T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-02-09T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Intro to OCTIS"/>
+<meta name="twitter:description" content="Optimizing and Comparing Topic Models is Simple!"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://kmclester.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Intro to OCTIS",
+      "item": "https://kmclester.com/posts/octis/octis/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Intro to OCTIS",
+  "name": "Intro to OCTIS",
+  "description": "Optimizing and Comparing Topic Models is Simple!",
+  "keywords": [
+    
+  ],
+  "articleBody": "OCTIS GitHub\nOCTIS or “Comparing and Optimizing Topic Models is Simple” was created by a team in Italy to assist with training, analyzing, and comparing topic models (Terragni et al. 2021). They intend for OCTIS to be used by researchers to aid in comparing models of interest; which are scored using benchmark datasets and well-known evalutation metrics. Assuming wide adoption, it would make comparing research teams results' much easier as everyone would be using the same testing methodology.\nWhat is Topic Modeling? If you have never heard of or worked with topic modeling, have no fear; the concept is pretty intuitive. The general premise behind topic models are that they are statistical methods that aim to extract the hidden topics underlying a collection of documents. Said differently, they allow us to get a “birds eye view” of a documents content. For example, if we were performing topic modeling on the linked research paper, the model may return “octis framework optimize evaluation hyperparameter”. As I mentioned, this gives us an idea of what the document is about without having to read the entire paper.\nA Brief History An early version of topic modeling was originally described in 1998 (Papadimitriou et al. 1998). Another was created by Thomas Hofmann in 1999 called probabilistic latent semantic analysis or “PLSA” (Hofmann 1999). Shortly thereafter, Latent Dirichlet allocation (LDA) was created as a generalization of PLSA - this is generally accepted as the most common topic model currently in use (Blei, Ng, and Jordan 2003).\nLDA is an unsupervised approach that allows us to find latent or “hidden” themes in a collection of documents. This process assumes each document is a “bag of words” and that each word/document falls into one of k topics. We’re able to use the following probabilities: P(topic t | document d) and P(word w | topic t) to surmise the appropriate topic associated with each document. LDA also uses Bayesian principles in the form of generating prior predictive probabilities and applying Bayesian updating to iteratively calculate posterior probabilities - once some threshold is met, the algorithm returns the list of topics and associated words.\nAs I mentioned, LDA is one of the most popular options and is great for what it is but it experiences one major pitfall – context. LDA and topic models as a whole began to fall out of favor with scientists around 2012 due to the introduction of neural based approaches (Ruder 2021). These approaches include word embeddings (word2vec, glove, etc), sequence-to-sequence models, attention (transform) models, and pre-trained language models (BERT, Huggingface, etc). A nueral based approach allows models to account for the context in which a word is spoken/written - they can alter their vector representation based on surrounding words, part of speech, etc.\nFortunately, topic models have recently recieved a neural “facelift” as well. Several new methods such as Neural LDA, Embedded Topic Models (ETM), and Contextualized Topic Models (CTM) have all been developed within the last two to five years (Terragni et al. 2021). The team behind OCTIS hope to combine both modern and traditional techniques into a unified framework - such that researchers can compare the accuracy of models against a standardized baseline. The intention is not to determine which model is the all-around king of models, rather, it is to test which model would be the best for a given scenario. Neural approaches are all the rave right now but occassionally it is wise to brush off the traditional methods as they may be faster, more efficient, or achieve 95% of the desired response with minimal effort. It is also a good idea to understand the old way of doing things so you can better appreciate what newer methods have to offer.\ntl;dr LDA is great; people think neural nets are cool; new isn’t always better but sometimes it is; OCTIS wants to make comparing them easier; models are just tools\nLearning is a Process OCTIS follows the general framework shown below. These pipelines are setup for ease of use but also repeatability. Understanding this workflow is key to being successful with OCTIS.\nPre-processing First, we import a raw dataset and pass it to the pre-processing pipeline. This pipeline can convert all text to lowercase, remove punctuation, lemmatization, remove stop words (a, and, the, etc.), remove unfrequent and most frequent words based on a given threshold, and remove documents with less words than some threshold value. It is important to remember that just because a utility is included, does not mean you have to use it. Not every document requires the aforementioned operations and it’s up to the researchers discression to determine the best course of action.\nOCTIS includes several tests datasets:\n   Dataset Domain # Docs Avg # words in docs # Unique words     20 News-groups Forum posts 16309 48 1612   BBC News News 2225 150 3106   M10 Scientific Papers 8355 6 1696   DBLP Scientific Papers 54595 5 1513    Topic Modeling OCTIS includes a variety of off-the-shelf topic models, including both classical and neural approaches. The included models are:\n Latent Dirichlet Allocation (LDA) Non-negative Matrix Factorization (NMF) Latent Semantic Analysis (LSI) Hierarchical Dirichlet Process (HDP) Neural LDA Product-of-Experts LDA (ProdLDA) Embedded Topic Models (ETM) Contexualized Topic Models (CTM)  Topic models are effectively a black-box. They take a dataset as input and a set of hyperparameters and return the top-t topic words, the document-topic distributions, and the topic-word distribution in a specified format.\nEvaluation metrics The evaluation metrics can be used in two ways:\n An objective which is targeted by the Bayesian Optimization strategy A metric in which to monitor the behavior of a topic model while the model is optimized on a different objective  Performance of the topic model can be evaluated using the following metrics:\n Topic coherence metrics Topic significance metrics Diversity metrics Classification metrics  OCTIS provides 10 evaluation metrics directly from their web dashboard and then 13 additional metrics can be accessed through the python library.\nHyper-parameter Optimization If any of the available hyper-parameters are selected to be optimized (for a given evaluation metric), the Bayesian Optimization engine explores the search space to determine the optimal settings. These optimal settings are based on a desired threshold set for the selected evaluation metric. The team behind OCTIS realized that the performance estimated by these metrics can be subject to noise, so they decided the objective function should be computed as the median of n-model runs, using the same hyper-paramter configuration.\nIn this case, Bayesian Optimization is a sequential model-based optimization strategy for black-box functions (topic models). The general idea is to use all of the model’s configurations evaluated so far to best approximate the value of the selected performance metric and then select a new promising configuration to evaluate (Terragni et al. 2021).\n“The approximation is provided by a probabilistic surrogate model, which describes the prior belief over the objective function using the observed configurations. The next configuration to evaluate is selected through the optimization of an acquisition function, which leverages the uncertainty in the posterior to guide the exploration.” (Terragni et al. 2021)\n OCTIS in Action LDA Example # Import dependencies from octis.models.LDA import LDA from octis.dataset.dataset import Dataset from octis.evaluation_metrics.diversity_metrics import TopicDiversity from octis.evaluation_metrics.coherence_metrics import Coherence  # Define dataset dataset = Dataset() dataset.fetch_dataset(\"20NewsGroup\")  # Create Model model = LDA(num_topics=20, alpha=0.1)  # Train the model using default partition choice output = model.train_model(dataset) print(*list(output.keys()), sep=\"\\n\") # Print the output identifiers topic-word-matrix topics topic-document-matrix test-topic-document-matrix    # Return the generated topics [' '.join(x) for x in output['topics']] ['woman son church kill body wife people mother leave start', 'government state people law information group issue military make control', 'file image program version application include widget system window server', 'people make give sin day time man life love good', 'list print program port computer printer include work address color', 'people religion make thing belief time christian question point church', 'car good make price engine mile power buy water sell', 'encryption chip clipper key system government technology law year escrow', 'time phone people ground happen start make hear leave put', 'question drive monitor power system apple post newsgroup answer gay', 'game team win play year good player time season make', 'drive card disk run work system driver scsi make chip', 'drug test patient disease doctor medical study problem good card', 'make fire claim people evidence point reason post word case', 'window problem work mode run block bit switch button memory', 'armenian people turkish year genocide population jewish village greek war', 'key mail send number message post info call reply company', 'homosexual man sex homosexuality male sexual cap make pen show', 'gun law weapon people firearm car good death pay kill', 'space launch system cost mission satellite orbit solar make year']    # Initialize performance metric npmi = Coherence(texts=dataset.get_corpus(), topk=10, measure='c_npmi') # Initialize performance metric topic_diversity = TopicDiversity(topk=10)  # Retrieve metric scores topic_diversity_score = topic_diversity.score(output) print(f'Topic diversity: {str(topic_diversity_score)}') npmi_score = npmi.score(output) print(f'Coherence: {str(npmi_score)}') Topic diversity: 0.725   Coherence: 0.07167448455491789    NOTE: For a neural-based example, see the Google Colab notebook provided by OCTIS.\n Sources Blei, David M, Andrew Y Ng, and Michael I Jordan. 2003. “Latent Dirichlet Allocation.” Journal of Machine Learning Research 3 (Jan): 993–1022.\n Hofmann, Thomas. 1999. “Probabilistic Latent Semantic Indexing.” In Proceedings of the 22nd Annual International ACM SIGIR Conference on Research and Development in Information Retrieval, 50–57. SIGIR ‘99. New York, NY, USA: Association for Computing Machinery. https://doi.org/10.1145/312624.312649.\n Papadimitriou, Christos H., Hisao Tamaki, Prabhakar Raghavan, and Santosh Vempala. 1998. “Latent Semantic Indexing: A Probabilistic Analysis.” In Proceedings of the Seventeenth ACM SIGACT-SIGMOD-SIGART Symposium on Principles of Database Systems, 159–68. PODS ‘98. New York, NY, USA: Association for Computing Machinery. https://doi.org/10.1145/275487.275505.\n Ruder, Sebastian. 2021. “A Review of the Recent History of Natural Language Processing.” Sebastian Ruder, Sebastian Ruder.\n Terragni, Silvia, Elisabetta Fersini, Bruno Giovanni Galuzzi, Pietro Tropeano, and Antonio Candelieri. 2021. “OCTIS: Comparing and Optimizing Topic Models Is Simple!” In Proceedings of the 16th Conference of the European Chapter of the Association for Computational Linguistics: System Demonstrations, 263–70. Online: Association for Computational Linguistics. https://doi.org/10.18653/v1/2021.eacl-demos.31.\n  ",
+  "wordCount" : "1658",
+  "inLanguage": "en",
+  "datePublished": "2022-02-09T00:00:00Z",
+  "dateModified": "2022-02-09T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Kyle McLester"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kmclester.com/posts/octis/octis/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kyle's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://kmclester.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://kmclester.com/" accesskey="h" title="Kyle&#39;s Blog (Alt + H)">Kyle&#39;s Blog</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://kmclester.com/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://kmclester.com/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://kmclester.com/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://kmclester.com/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://kmclester.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://kmclester.com/">Home</a>&nbsp;»&nbsp;<a href="https://kmclester.com/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Intro to OCTIS
+    </h1>
+    <div class="post-meta"><span title='2022-02-09 00:00:00 +0000 UTC'>February 9, 2022</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Kyle McLester&nbsp;|&nbsp;<a href="https://github.com/kmcleste/personal-blog/tree/main/content/posts/octis/octis.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#what-is-topic-modeling" aria-label="What is Topic Modeling?">What is Topic Modeling?</a></li>
+                <li>
+                    <a href="#a-brief-history" aria-label="A Brief History">A Brief History</a><ul>
+                        
+                <li>
+                    <a href="#tldr" aria-label="tl;dr">tl;dr</a></li></ul>
+                </li>
+                <li>
+                    <a href="#learning-is-a-process" aria-label="Learning is a Process">Learning is a Process</a><ul>
+                        
+                <li>
+                    <a href="#pre-processing" aria-label="Pre-processing">Pre-processing</a></li>
+                <li>
+                    <a href="#topic-modeling" aria-label="Topic Modeling">Topic Modeling</a></li>
+                <li>
+                    <a href="#evaluation-metrics" aria-label="Evaluation metrics">Evaluation metrics</a></li>
+                <li>
+                    <a href="#hyper-parameter-optimization" aria-label="Hyper-parameter Optimization">Hyper-parameter Optimization</a></li></ul>
+                </li>
+                <li>
+                    <a href="#octis-in-action" aria-label="OCTIS in Action">OCTIS in Action</a><ul>
+                        
+                <li>
+                    <a href="#lda-examplehttpscolabresearchgooglecomgithubmind-laboctisblobmasterexamplesoctis_lda_training_onlyipynb" aria-label="LDA Example"><a href="https://colab.research.google.com/github/MIND-Lab/OCTIS/blob/master/examples/OCTIS_LDA_training_only.ipynb">LDA Example</a></a></li></ul>
+                </li>
+                <li>
+                    <a href="#sources" aria-label="Sources">Sources</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><strong><a href="https://github.com/MIND-Lab/OCTIS">OCTIS GitHub</a></strong></p>
+<p>OCTIS or &ldquo;Comparing and Optimizing Topic Models is Simple&rdquo; was created
+by a team in Italy to assist with training, analyzing, and comparing
+topic models (Terragni et al. 2021). They intend for OCTIS to be used by
+researchers to aid in comparing models of interest; which are scored
+using benchmark datasets and well-known evalutation metrics. Assuming
+wide adoption, it would make comparing research teams results' much
+easier as everyone would be using the same testing methodology.</p>
+<h2 id="what-is-topic-modeling">What is Topic Modeling?<a hidden class="anchor" aria-hidden="true" href="#what-is-topic-modeling">#</a></h2>
+<p>If you have never heard of or worked with topic modeling, have no fear;
+the concept is pretty intuitive. The general premise behind topic models
+are that they are statistical methods that aim to extract the hidden
+topics underlying a collection of documents. Said differently, they
+allow us to get a &ldquo;birds eye view&rdquo; of a documents content. For example,
+if we were performing topic modeling on the linked research paper, the
+model may return &ldquo;octis framework optimize evaluation hyperparameter&rdquo;.
+As I mentioned, this gives us an idea of what the document is about
+without having to read the entire paper.</p>
+<h2 id="a-brief-history">A Brief History<a hidden class="anchor" aria-hidden="true" href="#a-brief-history">#</a></h2>
+<p>An early version of topic modeling was originally described in 1998
+(Papadimitriou et al. 1998). Another was created by Thomas Hofmann in
+1999 called <em>probabilistic latent semantic analysis</em> or &ldquo;PLSA&rdquo; (Hofmann
+1999). Shortly thereafter, Latent Dirichlet allocation (LDA) was created
+as a generalization of PLSA - this is generally accepted as the most
+common topic model currently in use (Blei, Ng, and Jordan 2003).</p>
+<p>LDA is an unsupervised approach that allows us to find latent or
+&ldquo;hidden&rdquo; themes in a collection of documents. This process assumes each
+document is a &ldquo;bag of words&rdquo; and that each word/document falls into one
+of <strong>k</strong> topics. We&rsquo;re able to use the following probabilities:
+<strong>P(topic <em>t</em> | document <em>d</em>)</strong> and <strong>P(word <em>w</em> | topic <em>t</em>)</strong> to
+surmise the appropriate topic associated with each document. LDA also
+uses Bayesian principles in the form of generating prior predictive
+probabilities and applying Bayesian updating to iteratively calculate
+posterior probabilities - once some threshold is met, the algorithm
+returns the list of topics and associated words.</p>
+<p>As I mentioned, LDA is one of the most popular options and is great for
+what it is but it experiences one major pitfall &ndash; context. LDA and
+topic models as a whole began to fall out of favor with scientists
+around 2012 due to the introduction of neural based approaches (Ruder
+2021). These approaches include word embeddings (word2vec, glove, etc),
+sequence-to-sequence models, attention (transform) models, and
+pre-trained language models (BERT, Huggingface, etc). A nueral based
+approach allows models to account for the context in which a word is
+spoken/written - they can alter their vector representation based on
+surrounding words, part of speech, etc.</p>
+<p>Fortunately, topic models have recently recieved a neural &ldquo;facelift&rdquo; as
+well. Several new methods such as Neural LDA, Embedded Topic Models
+(ETM), and Contextualized Topic Models (CTM) have all been developed
+within the last two to five years (Terragni et al. 2021). The team
+behind OCTIS hope to combine both modern and traditional techniques into
+a unified framework - such that researchers can compare the accuracy of
+models against a standardized baseline. The intention is not to
+determine which model is the all-around king of models, rather, it is to
+test which model would be the best for a given scenario. Neural
+approaches are all the rave right now but occassionally it is wise to
+brush off the traditional methods as they may be faster, more efficient,
+or achieve 95% of the desired response with minimal effort. It is also a
+good idea to understand the old way of doing things so you can better
+appreciate what newer methods have to offer.</p>
+<h3 id="tldr">tl;dr<a hidden class="anchor" aria-hidden="true" href="#tldr">#</a></h3>
+<p>LDA is great; people think neural nets are cool; new isn&rsquo;t always better
+but sometimes it is; OCTIS wants to make comparing them easier; models
+are just tools</p>
+<h2 id="learning-is-a-process">Learning is a Process<a hidden class="anchor" aria-hidden="true" href="#learning-is-a-process">#</a></h2>
+<p>OCTIS follows the general framework shown below. These pipelines are
+setup for ease of use but also repeatability. Understanding this
+workflow is key to being successful with OCTIS.</p>
+<p><img loading="lazy" src="/octis-workflow.png" alt="OCTIS workflow"  />
+</p>
+<h3 id="pre-processing">Pre-processing<a hidden class="anchor" aria-hidden="true" href="#pre-processing">#</a></h3>
+<p>First, we import a raw dataset and pass it to the pre-processing
+pipeline. This pipeline can convert all text to lowercase, remove
+punctuation, lemmatization, remove stop words (a, and, the, etc.),
+remove unfrequent and most frequent words based on a given threshold,
+and remove documents with less words than some threshold value. It is
+important to remember that just because a utility is included, does
+<strong>not</strong> mean you have to use it. Not every document requires the
+aforementioned operations and it&rsquo;s up to the researchers discression to
+determine the best course of action.</p>
+<p>OCTIS includes several tests datasets:</p>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Domain</th>
+<th># Docs</th>
+<th>Avg # words in docs</th>
+<th># Unique words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20 News-groups</td>
+<td>Forum posts</td>
+<td>16309</td>
+<td>48</td>
+<td>1612</td>
+</tr>
+<tr>
+<td>BBC News</td>
+<td>News</td>
+<td>2225</td>
+<td>150</td>
+<td>3106</td>
+</tr>
+<tr>
+<td>M10</td>
+<td>Scientific Papers</td>
+<td>8355</td>
+<td>6</td>
+<td>1696</td>
+</tr>
+<tr>
+<td>DBLP</td>
+<td>Scientific Papers</td>
+<td>54595</td>
+<td>5</td>
+<td>1513</td>
+</tr>
+</tbody>
+</table>
+<h3 id="topic-modeling">Topic Modeling<a hidden class="anchor" aria-hidden="true" href="#topic-modeling">#</a></h3>
+<p>OCTIS includes a variety of off-the-shelf topic models, including both
+classical and neural approaches. The included models are:</p>
+<ul>
+<li>Latent Dirichlet Allocation (LDA)</li>
+<li>Non-negative Matrix Factorization (NMF)</li>
+<li>Latent Semantic Analysis (LSI)</li>
+<li>Hierarchical Dirichlet Process (HDP)</li>
+<li>Neural LDA</li>
+<li>Product-of-Experts LDA (ProdLDA)</li>
+<li>Embedded Topic Models (ETM)</li>
+<li>Contexualized Topic Models (CTM)</li>
+</ul>
+<p>Topic models are effectively a black-box. They take a dataset as input
+and a set of hyperparameters and return the top-t topic words, the
+document-topic distributions, and the topic-word distribution in a
+specified format.</p>
+<h3 id="evaluation-metrics">Evaluation metrics<a hidden class="anchor" aria-hidden="true" href="#evaluation-metrics">#</a></h3>
+<p>The evaluation metrics can be used in two ways:</p>
+<ul>
+<li>An objective which is targeted by the Bayesian Optimization strategy</li>
+<li>A metric in which to monitor the behavior of a topic model while the
+model is optimized on a different objective</li>
+</ul>
+<p>Performance of the topic model can be evaluated using the following
+metrics:</p>
+<ul>
+<li>Topic coherence metrics</li>
+<li>Topic significance metrics</li>
+<li>Diversity metrics</li>
+<li>Classification metrics</li>
+</ul>
+<p>OCTIS provides 10 evaluation metrics directly from their web dashboard
+and then 13 additional metrics can be accessed through the python
+library.</p>
+<h3 id="hyper-parameter-optimization">Hyper-parameter Optimization<a hidden class="anchor" aria-hidden="true" href="#hyper-parameter-optimization">#</a></h3>
+<p>If any of the available hyper-parameters are selected to be optimized
+(for a given evaluation metric), the Bayesian Optimization engine
+explores the search space to determine the optimal settings. These
+optimal settings are based on a desired threshold set for the selected
+evaluation metric. The team behind OCTIS realized that the performance
+estimated by these metrics can be subject to noise, so they decided the
+objective function should be computed as the median of n-model runs,
+using the same hyper-paramter configuration.</p>
+<p>In this case, Bayesian Optimization is a sequential model-based
+optimization strategy for black-box functions (topic models). The
+general idea is to use all of the model&rsquo;s configurations evaluated so
+far to best approximate the value of the selected performance metric and
+then select a new promising configuration to evaluate (Terragni et al.
+2021).</p>
+<p>&ldquo;The approximation is provided by a probabilistic surrogate model, which
+describes the prior belief over the objective function using the
+observed configurations. The next configuration to evaluate is selected
+through the optimization of an acquisition function, which leverages the
+uncertainty in the posterior to guide the exploration.&rdquo; (Terragni et al.
+2021)</p>
+<p><img loading="lazy" src="/octis-optimization.png" alt="Comparison between OCTIS and well known topic modeling
+libraries"  />
+</p>
+<hr>
+<h2 id="octis-in-action">OCTIS in Action<a hidden class="anchor" aria-hidden="true" href="#octis-in-action">#</a></h2>
+<h3 id="lda-examplehttpscolabresearchgooglecomgithubmind-laboctisblobmasterexamplesoctis_lda_training_onlyipynb"><a href="https://colab.research.google.com/github/MIND-Lab/OCTIS/blob/master/examples/OCTIS_LDA_training_only.ipynb">LDA Example</a><a hidden class="anchor" aria-hidden="true" href="#lda-examplehttpscolabresearchgooglecomgithubmind-laboctisblobmasterexamplesoctis_lda_training_onlyipynb">#</a></h3>
+<div class="cell" execution_count="1">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Import dependencies</span>
+<span style="color:#f92672">from</span> octis.models.LDA <span style="color:#f92672">import</span> LDA
+<span style="color:#f92672">from</span> octis.dataset.dataset <span style="color:#f92672">import</span> Dataset
+<span style="color:#f92672">from</span> octis.evaluation_metrics.diversity_metrics <span style="color:#f92672">import</span> TopicDiversity
+<span style="color:#f92672">from</span> octis.evaluation_metrics.coherence_metrics <span style="color:#f92672">import</span> Coherence
+</code></pre></div></div>
+<div class="cell" execution_count="2">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Define dataset</span>
+dataset <span style="color:#f92672">=</span> Dataset()
+dataset<span style="color:#f92672">.</span>fetch_dataset(<span style="color:#e6db74">&#34;20NewsGroup&#34;</span>)
+</code></pre></div></div>
+<div class="cell" execution_count="3">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Create Model</span>
+model <span style="color:#f92672">=</span> LDA(num_topics<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
+</code></pre></div></div>
+<div class="cell" execution_count="4">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Train the model using default partition choice</span>
+output <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>train_model(dataset)
+
+print(<span style="color:#f92672">*</span>list(output<span style="color:#f92672">.</span>keys()), sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>) <span style="color:#75715e"># Print the output identifiers</span>
+</code></pre></div><div class="cell-output-stdout">
+<pre><code>topic-word-matrix
+topics
+topic-document-matrix
+test-topic-document-matrix
+</code></pre>
+</div>
+</div>
+<div class="cell" execution_count="5">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Return the generated topics</span>
+[<span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> output[<span style="color:#e6db74">&#39;topics&#39;</span>]]
+</code></pre></div><div class="cell-output-display" execution_count="5">
+<pre><code>['woman son church kill body wife people mother leave start',
+ 'government state people law information group issue military make control',
+ 'file image program version application include widget system window server',
+ 'people make give sin day time man life love good',
+ 'list print program port computer printer include work address color',
+ 'people religion make thing belief time christian question point church',
+ 'car good make price engine mile power buy water sell',
+ 'encryption chip clipper key system government technology law year escrow',
+ 'time phone people ground happen start make hear leave put',
+ 'question drive monitor power system apple post newsgroup answer gay',
+ 'game team win play year good player time season make',
+ 'drive card disk run work system driver scsi make chip',
+ 'drug test patient disease doctor medical study problem good card',
+ 'make fire claim people evidence point reason post word case',
+ 'window problem work mode run block bit switch button memory',
+ 'armenian people turkish year genocide population jewish village greek war',
+ 'key mail send number message post info call reply company',
+ 'homosexual man sex homosexuality male sexual cap make pen show',
+ 'gun law weapon people firearm car good death pay kill',
+ 'space launch system cost mission satellite orbit solar make year']
+</code></pre>
+</div>
+</div>
+<div class="cell" execution_count="6">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Initialize performance metric</span>
+npmi <span style="color:#f92672">=</span> Coherence(texts<span style="color:#f92672">=</span>dataset<span style="color:#f92672">.</span>get_corpus(), topk<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, measure<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;c_npmi&#39;</span>)
+
+<span style="color:#75715e"># Initialize performance metric</span>
+topic_diversity <span style="color:#f92672">=</span> TopicDiversity(topk<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+</code></pre></div></div>
+<div class="cell" execution_count="7">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Retrieve metric scores</span>
+topic_diversity_score <span style="color:#f92672">=</span> topic_diversity<span style="color:#f92672">.</span>score(output)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Topic diversity: </span><span style="color:#e6db74">{</span>str(topic_diversity_score)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+
+npmi_score <span style="color:#f92672">=</span> npmi<span style="color:#f92672">.</span>score(output)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Coherence: </span><span style="color:#e6db74">{</span>str(npmi_score)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><div class="cell-output-stdout">
+<pre><code>Topic diversity: 0.725
+</code></pre>
+</div>
+<div class="cell-output-stdout">
+<pre><code>Coherence: 0.07167448455491789
+</code></pre>
+</div>
+</div>
+<p><strong>NOTE</strong>: For a neural-based example, see the <a href="https://colab.research.google.com/github/MIND-Lab/OCTIS/blob/master/examples/OCTIS_Optimizing_CTM.ipynb">Google
+Colab</a>
+notebook provided by OCTIS.</p>
+<hr>
+<h2 id="sources">Sources<a hidden class="anchor" aria-hidden="true" href="#sources">#</a></h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-blei2003latent" class="csl-entry">
+<p>Blei, David M, Andrew Y Ng, and Michael I Jordan. 2003. &ldquo;Latent
+Dirichlet Allocation.&rdquo; <em>Journal of Machine Learning Research</em> 3 (Jan):
+993&ndash;1022.</p>
+</div>
+<div id="ref-10.1145/312624.312649" class="csl-entry">
+<p>Hofmann, Thomas. 1999. &ldquo;Probabilistic Latent Semantic Indexing.&rdquo; In
+<em>Proceedings of the 22nd Annual International ACM SIGIR Conference on
+Research and Development in Information Retrieval</em>, 50&ndash;57. SIGIR &lsquo;99.
+New York, NY, USA: Association for Computing Machinery.
+<a href="https://doi.org/10.1145/312624.312649">https://doi.org/10.1145/312624.312649</a>.</p>
+</div>
+<div id="ref-10.1145/275487.275505" class="csl-entry">
+<p>Papadimitriou, Christos H., Hisao Tamaki, Prabhakar Raghavan, and
+Santosh Vempala. 1998. &ldquo;Latent Semantic Indexing: A Probabilistic
+Analysis.&rdquo; In <em>Proceedings of the Seventeenth ACM SIGACT-SIGMOD-SIGART
+Symposium on Principles of Database Systems</em>, 159&ndash;68. PODS &lsquo;98. New
+York, NY, USA: Association for Computing Machinery.
+<a href="https://doi.org/10.1145/275487.275505">https://doi.org/10.1145/275487.275505</a>.</p>
+</div>
+<div id="ref-ruder2021a" class="csl-entry">
+<p>Ruder, Sebastian. 2021. &ldquo;A Review of the Recent History of Natural
+Language Processing.&rdquo; Sebastian Ruder, Sebastian Ruder.</p>
+</div>
+<div id="ref-terragni-etal-2021-octis" class="csl-entry">
+<p>Terragni, Silvia, Elisabetta Fersini, Bruno Giovanni Galuzzi, Pietro
+Tropeano, and Antonio Candelieri. 2021. &ldquo;OCTIS: Comparing and Optimizing
+Topic Models Is Simple!&rdquo; In <em>Proceedings of the 16th Conference of the
+European Chapter of the Association for Computational Linguistics:
+System Demonstrations</em>, 263&ndash;70. Online: Association for Computational
+Linguistics. <a href="https://doi.org/10.18653/v1/2021.eacl-demos.31">https://doi.org/10.18653/v1/2021.eacl-demos.31</a>.</p>
+</div>
+</div>
+
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="prev" href="https://kmclester.com/posts/github/git-ssh/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>GitHub SSH</span>
+  </a>
+  <a class="next" href="https://kmclester.com/posts/quarto/how-to-quarto/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>How to Quarto</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Intro to OCTIS on twitter"
+        href="https://twitter.com/intent/tweet/?text=Intro%20to%20OCTIS&amp;url=https%3a%2f%2fkmclester.com%2fposts%2foctis%2foctis%2f&amp;hashtags=">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Intro to OCTIS on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkmclester.com%2fposts%2foctis%2foctis%2f&amp;title=Intro%20to%20OCTIS&amp;summary=Intro%20to%20OCTIS&amp;source=https%3a%2f%2fkmclester.com%2fposts%2foctis%2foctis%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Intro to OCTIS on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fkmclester.com%2fposts%2foctis%2foctis%2f&title=Intro%20to%20OCTIS">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Intro to OCTIS on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkmclester.com%2fposts%2foctis%2foctis%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Intro to OCTIS on whatsapp"
+        href="https://api.whatsapp.com/send?text=Intro%20to%20OCTIS%20-%20https%3a%2f%2fkmclester.com%2fposts%2foctis%2foctis%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Intro to OCTIS on telegram"
+        href="https://telegram.me/share/url?text=Intro%20to%20OCTIS&amp;url=https%3a%2f%2fkmclester.com%2fposts%2foctis%2foctis%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://kmclester.com/">Kyle&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

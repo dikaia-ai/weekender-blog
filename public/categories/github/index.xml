@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Github on Kyle&#39;s Blog</title>
+    <link>https://kmclester.com/categories/github/</link>
+    <description>Recent content in Github on Kyle&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 15 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kmclester.com/categories/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating a GitHub Repo</title>
+      <link>https://kmclester.com/posts/github/first-git/</link>
+      <pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/github/first-git/</guid>
+      <description>Create repository and make first commit</description>
+    </item>
+    
+    <item>
+      <title>GitHub SSH</title>
+      <link>https://kmclester.com/posts/github/git-ssh/</link>
+      <pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/github/git-ssh/</guid>
+      <description>Secure git repo connection with SSH</description>
+    </item>
+    
+  </channel>
+</rss>

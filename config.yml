@@ -13,7 +13,7 @@ googleAnalytics: G-06XBWZ9STS
 
 minify:
     disableXML: true
-    minifyOutput: false
+    minifyOutput: true
 
 languages:
     en:
@@ -35,7 +35,7 @@ languages:
                   weight: 10
                 - name: Contact
                   url: contact/
-                  weight: 10
+                  weight: 2
 
 outputs:
     home:

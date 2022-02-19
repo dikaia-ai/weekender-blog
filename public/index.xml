@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Kyle&#39;s Blog</title>
+    <link>https://kmclester.com/</link>
+    <description>Recent content on Kyle&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 15 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kmclester.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating a GitHub Repo</title>
+      <link>https://kmclester.com/posts/github/first-git/</link>
+      <pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/github/first-git/</guid>
+      <description>Create repository and make first commit</description>
+    </item>
+    
+    <item>
+      <title>Creating a Personal Blog Site</title>
+      <link>https://kmclester.com/posts/hugo/create-blog/</link>
+      <pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/hugo/create-blog/</guid>
+      <description>🚧 UNDER CONSTRUCTION</description>
+    </item>
+    
+    <item>
+      <title>GitHub SSH</title>
+      <link>https://kmclester.com/posts/github/git-ssh/</link>
+      <pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/github/git-ssh/</guid>
+      <description>Secure git repo connection with SSH</description>
+    </item>
+    
+    <item>
+      <title>Intro to OCTIS</title>
+      <link>https://kmclester.com/posts/octis/octis/</link>
+      <pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/octis/octis/</guid>
+      <description>Optimizing and Comparing Topic Models is Simple!</description>
+    </item>
+    
+    <item>
+      <title>How to Quarto</title>
+      <link>https://kmclester.com/posts/quarto/how-to-quarto/</link>
+      <pubDate>Tue, 08 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/quarto/how-to-quarto/</guid>
+      <description>Integrate Quarto to your Hugo website</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Rasa</title>
+      <link>https://kmclester.com/posts/rasa/create-chatbot/</link>
+      <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/rasa/create-chatbot/</guid>
+      <description>🚧  UNDER CONSTRUCTION</description>
+    </item>
+    
+    <item>
+      <title>Google Cloud Platform</title>
+      <link>https://kmclester.com/posts/gcp/gcp-vm/</link>
+      <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/gcp/gcp-vm/</guid>
+      <description>🚧  UNDER CONSTRUCTION</description>
+    </item>
+    
+    
+    <item>
+      <title>Contact</title>
+      <link>https://kmclester.com/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/contact/</guid>
+      <description>Let&amp;rsquo;s Connect!</description>
+    </item>
+    
+    
+  </channel>
+</rss>
