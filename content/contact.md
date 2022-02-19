@@ -1,10 +1,9 @@
 ---
-layout: "contact"
-showReadingTime: false
-showTOC: false
-title: Contact
-url: "/contact/"
-summary: contact
+    # showReadingTime: false
+    # showTOC: false
+    title: Contact
+    # url: "/contact/"
+    # summary: contact
 ---
 
 | name | email | best time to contact |
