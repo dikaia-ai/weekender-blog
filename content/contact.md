@@ -25,6 +25,7 @@ categories:
     display: inline-block;
     padding: 8px;
     margin-bottom: 32px;
+    color: white;
   }
 
   form{
@@ -41,6 +42,11 @@ categories:
     flex-direction: column;
     margin-bottom: 24px;
     width: 48%;
+    color: white;
+  }
+  
+  .full{
+      color: white;
   }
 
   form label{
