@@ -8,6 +8,7 @@ tags:
     - contact
 categories:
     - Contact
+layout: "contact"
 ---
 
 <!-- | name | email | best time to contact |
@@ -16,4 +17,4 @@ categories:
 
 There's supposed to be a fancy form here but for whatever reason it won't render -->
 
-{{< contact/form >}}
+<!-- {{< contact/form >}} -->
