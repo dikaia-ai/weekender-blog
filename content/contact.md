@@ -2,7 +2,6 @@
 showReadingTime: false
 showTOC: false
 title: Contact
-url: "/contact/"
 summary: Let's Connect!
 tags:
     - contact

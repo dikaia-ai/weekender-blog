@@ -86,7 +86,6 @@ taxonomies:
     category: categories
     tag: tags
     series: series
-    contact: contact
 
 markup:
     goldmark:
