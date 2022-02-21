@@ -7,16 +7,7 @@ tags:
     - contact
 categories:
     - Contact
-# layout: "contact"
 ---
-
-<!-- | name | email | best time to contact |
-|------|-------|----------------------|
-| Kyle McLester | kmcleste@uncc.edu | M-F 12p-9p EST |
-
-There's supposed to be a fancy form here but for whatever reason it won't render -->
-
-<!-- {{< contact/form >}} -->
 
 {{< rawhtml >}}
 <style>
@@ -132,10 +123,14 @@ There's supposed to be a fancy form here but for whatever reason it won't render
       width: 100%;
     }
   }
+
+  .hidden{
+      visibility: hidden;
+  }
 </style>
 
 <div>
-<form name="contact" method="POST" data-netlify="true">
+<form name="contact" method="POST" netlify-honeypot="bot-field" data-netlify="true">
     <div class="title">
       <h2>Let's Connect!</h2>
     </div>
@@ -157,6 +152,12 @@ There's supposed to be a fancy form here but for whatever reason it won't render
       <input type="submit" value = "SEND MESSAGE">
       <input type="reset" value = "RESET">
     </div>
+    <p class="hidden">
+        <label>
+            Don't fill this out if you're human: <input name="bot-field" />
+        </label>
+    </p>
 </form>
 </div>
+
 {{< /rawhtml >}}
