@@ -135,7 +135,7 @@ There's supposed to be a fancy form here but for whatever reason it won't render
 </style>
 
 <div>
-<form name=contact method=post data-netlify=true>
+<form name="contact" method="POST" data-netlify="true">
     <div class="title">
       <h2>Let's Connect!</h2>
     </div>
