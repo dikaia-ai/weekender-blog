@@ -142,16 +142,16 @@ There's supposed to be a fancy form here but for whatever reason it won't render
     <div class="half">
       <div class="item">
         <label for="name">NAME</label>
-        <input style="color:white;" type="text" id = "name" required>
+        <input style="color:white;" type="text" id = "name" name="name" required>
       </div>
       <div class="item">
         <label for="email">EMAIL</label>
-        <input style="color:white;" type="text" id = "email" required>
+        <input style="color:white;" type="text" id = "email" name="email" required>
       </div>
     </div>
     <div class="full">
       <label for="message">MESSAGE</label>
-      <textarea style="color:white;" name="" id = "message" required></textarea>
+      <textarea style="color:white;" name="" id = "message" name="message" required></textarea>
     </div>
     <div class="action">
       <input type="submit" value = "SEND MESSAGE">
