@@ -71,7 +71,7 @@ hugo new site my-blog -f yml
 # the default is toml but I prefer yaml
 ```
 
-![Hugo New Site](/posts/hugo/test.png)
+![Hugo New Site](/posts/hugo/hugo-new-site.png)
 
 This command will create a new site folder called `my-blog` in the directory from which
 you ran the script. For example, if we created a new website in the `www` folder, the
