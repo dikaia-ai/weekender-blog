@@ -152,7 +152,7 @@ working.
     that you downloaded the theme from.
 
 This is going to be a lot of text - [skip to next step
-⬇️](https://kmclester/posts/hugo/create-blog/#serve-hugo-site)
+⬇️](https://kmclester.com/posts/hugo/create-blog/#serve-hugo-site)
 
 ``` yaml
 baseURL: "https://kmclester.com/"

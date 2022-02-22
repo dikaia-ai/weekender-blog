@@ -125,7 +125,7 @@ I am using the [PaperMod theme](https://github.com/adityatelange/hugo-PaperMod),
 
 2. Next, we must alter the sites `config.yml` to use this new theme. The config file allows us to take advantage of the features that come bundled with the theme - and by setting certain variables, we can activate or modify these features. Below is an example of how I have my config setup but this is not the only way to do it, as you may need more or less features than I do. I strongly suggest checking if your theme has an example config file on the GitHub page that you downloaded the theme from.
 
-This is going to be a lot of text - [skip to next step ⬇️](https://kmclester/posts/hugo/create-blog/#serve-hugo-site)
+This is going to be a lot of text - [skip to next step ⬇️](https://kmclester.com/posts/hugo/create-blog/#serve-hugo-site)
 
 ```yaml
 baseURL: "https://kmclester.com/"
