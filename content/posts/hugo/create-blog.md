@@ -312,4 +312,4 @@ Once you have logged in, you should be greeted with a dashboard with the option 
 
 ## Closing
 
-Congrats on making it this far. If you have any questions or concerns, please feel free to reach out using the [contact page](https://kmclester.com/contact/). Please share with anyone you think will find this useful!!
+Congrats on making it this far. If you have any questions or concerns, please feel free to reach out using the [contact page](https://kmclester.com/contact/). Please share with anyone that might find this useful!!
