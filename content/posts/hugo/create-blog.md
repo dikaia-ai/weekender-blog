@@ -11,7 +11,7 @@ tags:
     - personal website
     - markdown
     - netlify
-summary: 🚧  UNDER CONSTRUCTION
+summary: Create Your First Hugo Site with Netlify
 ---
 
 [Hugo](https://gohugo.io/) is the foundation we will be using to create our blog website -
