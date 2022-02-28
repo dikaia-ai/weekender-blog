@@ -1,6 +1,6 @@
 ---
 author: Kyle McLester
-date: 2022-02-28
+date: 2022-01-01
 format: hugo
 title: Getting Started with Neural Search
 categories:
