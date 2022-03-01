@@ -23,7 +23,11 @@ This also aids the function of **reproducibility** -- say you have a project tha
 There are several virtual environment tools but I will be showing you **virtualenv**. To install this on Linux or MacOS, run the following:
 
 ```bash
-python3 -m pip install virtualenv
+# Linux
+sudo apt-get install virtualenv
+
+#MacOS
+brew install virtualenv
 ```
 
 You can confirm this was installed by entering:
