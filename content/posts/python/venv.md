@@ -9,7 +9,7 @@ tags:
     - venv
     - virtualenv
     - environments
-summary: 🚧 UNDER CONSTRUCTION
+summary: Create virtual environments for code reproducibility and easy sandboxing of python packages
 ---
 
 Have you ever gone to follow a python tutorial and realized that nothing seems to work - or that you get seemingly endless package errors? This is where **virtual environments** can come in handy.
