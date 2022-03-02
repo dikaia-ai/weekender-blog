@@ -61,6 +61,12 @@ You may have noticed this new `venv` folder appear but you are not able to acces
 source venv/bin/activate
 ```
 
+You will know `venv` is active when your terminal shows the environment name:
+
+```bash
+(venv) kyle@ubuntu:~$
+```
+
 The above will run the activation script from within the `venv` folder. Keep in mind that if you are not running this from your root project directory, that you will need to replace the word `venv` with your entire directory path.
 
 Now you are free to `pip install` packages and they will be saved in the `venv` environment.
