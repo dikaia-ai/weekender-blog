@@ -1,5 +1,5 @@
-baseURL: "https://kmclester.com/"
-title: Kyle's Blog
+baseURL: # INSERT SITE URL
+title: Weekend Data Scientist
 paginate: 5
 theme: PaperMod
 
@@ -9,7 +9,7 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 enableEmoji: true
-googleAnalytics: G-06XBWZ9STS
+googleAnalytics: # INSERT GOOGLE ANALYTICS KEY
 
 minify:
     disableXML: true
@@ -45,8 +45,8 @@ outputs:
 
 params:
     env: production
-    description: "Personal blog"
-    author: Kyle McLester
+    description: "Weekend Data Scientist Blog"
+    author: Ryan Wesslen
 
     defaultTheme: auto
     # disableThemeToggle: true
@@ -63,23 +63,20 @@ params:
     homeInfoParams:
         Title: "Welcome!"
         Content: >
-            This website is going to act as a dumping ground for things I'm learning or working on.
-            Feel free to take a peek
+            # INSERT WELCOME MESSAGE CONTENT
 
     socialIcons:
         - name: github
-          url: "https://github.com/kmcleste"
-        - name: RsS
-          url: "index.xml"
+          url: "https://github.com/dikaia-ai"
 
     editPost:
-        URL: "https://github.com/kmcleste/personal-blog/tree/main/content"
+        URL: "https://github.com/dikaia-ai/weekender-blog/tree/main/content"
         Text: "Suggest Changes" # edit text
         appendFilePath: true # to append file path to Edit link
 
     analytics:
         google:
-            SiteVerificationTag: "G-06XBWZ9STS"
+            SiteVerificationTag: # INSERT GOOGLE ANALYTICS KEY
 
 
 taxonomies:
