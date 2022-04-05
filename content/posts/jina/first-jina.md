@@ -13,7 +13,7 @@ tags:
     - flow
     - executor
     - document
-summary: 🚧 UNDER CONSTRUCTION - Using Jina.ai to create a contexualized search system for YouTube subtitles and transcripts
+summary: Using Jina.ai to create a contexualized search system for YouTube subtitles and transcripts
 ---
 
 ## What is Neural Search?
