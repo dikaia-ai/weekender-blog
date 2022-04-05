@@ -5,7 +5,52 @@
     <link>https://kmclester.com/</link>
     <description>Recent content on Kyle&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 15 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kmclester.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kmclester.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rasa Ephemeral Installer</title>
+      <link>https://kmclester.com/posts/rasa/rei/</link>
+      <pubDate>Thu, 03 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/rasa/rei/</guid>
+      <description>🚧 UNDER CONSTRUCTION - Use the Rasa Ephemeral Installer to deploy to a Google Cloud server; gain access to useful features like Rasa X and GitHub integration</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Rasa - Part 1</title>
+      <link>https://kmclester.com/posts/rasa/create-chatbot/</link>
+      <pubDate>Tue, 01 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/rasa/create-chatbot/</guid>
+      <description>Creating your first conversational ai assistant using Rasa Open Source</description>
+    </item>
+    
+    <item>
+      <title>Python Virtual Environments</title>
+      <link>https://kmclester.com/posts/python/venv/</link>
+      <pubDate>Mon, 28 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/python/venv/</guid>
+      <description>Create virtual environments for code reproducibility and easy sandboxing of python packages</description>
+    </item>
+    
+    <item>
+      <title>Creating a Personal Blog Site</title>
+      <link>https://kmclester.com/posts/hugo/create-blog/</link>
+      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/hugo/create-blog/</guid>
+      <description>Create Your First Hugo Site with Netlify</description>
+    </item>
+    
+    <item>
+      <title>Google Cloud Platform</title>
+      <link>https://kmclester.com/posts/gcp/gcp-vm/</link>
+      <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/gcp/gcp-vm/</guid>
+      <description>Create a GCP Virtual Machine for Web or App Hosting</description>
+    </item>
+    
     <item>
       <title>Creating a GitHub Repo</title>
       <link>https://kmclester.com/posts/github/first-git/</link>
@@ -13,15 +58,6 @@
       
       <guid>https://kmclester.com/posts/github/first-git/</guid>
       <description>Create repository and make first commit</description>
-    </item>
-    
-    <item>
-      <title>Creating a Personal Blog Site</title>
-      <link>https://kmclester.com/posts/hugo/create-blog/</link>
-      <pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kmclester.com/posts/hugo/create-blog/</guid>
-      <description>🚧 UNDER CONSTRUCTION</description>
     </item>
     
     <item>
@@ -52,21 +88,39 @@
     </item>
     
     <item>
-      <title>Getting Started with Rasa</title>
-      <link>https://kmclester.com/posts/rasa/create-chatbot/</link>
-      <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+      <title>Connecting Rasa to Slack Application</title>
+      <link>https://kmclester.com/posts/rasa/slack/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://kmclester.com/posts/rasa/create-chatbot/</guid>
-      <description>🚧  UNDER CONSTRUCTION</description>
+      <guid>https://kmclester.com/posts/rasa/slack/</guid>
+      <description>🚧 UNDER CONSTRUCTION</description>
     </item>
     
     <item>
-      <title>Google Cloud Platform</title>
-      <link>https://kmclester.com/posts/gcp/gcp-vm/</link>
-      <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+      <title>Getting Started with Neural Search</title>
+      <link>https://kmclester.com/posts/jina/first-jina/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://kmclester.com/posts/gcp/gcp-vm/</guid>
-      <description>🚧  UNDER CONSTRUCTION</description>
+      <guid>https://kmclester.com/posts/jina/first-jina/</guid>
+      <description>🚧 UNDER CONSTRUCTION - Using Jina.ai to create a basic multi-modal neural search application</description>
+    </item>
+    
+    <item>
+      <title>Understanding Attention Models</title>
+      <link>https://kmclester.com/posts/nlp/attention-models/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/nlp/attention-models/</guid>
+      <description>🚧 UNDER CONSTRUCTION</description>
+    </item>
+    
+    <item>
+      <title>What are Word Embeddings?</title>
+      <link>https://kmclester.com/posts/nlp/word-embeddings/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kmclester.com/posts/nlp/word-embeddings/</guid>
+      <description>🚧 UNDER CONSTRUCTION - A bried history and explanation of word embeddings, their application, and alternatives</description>
     </item>
     
     
