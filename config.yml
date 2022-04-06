@@ -67,7 +67,7 @@ params:
 
     socialIcons:
         - name: github
-          url: "https://github.com/dikaia-ai"
+          url: "https://github.com/dikaia-ai/weekender-blog/"
 
     editPost:
         URL: "https://github.com/dikaia-ai/weekender-blog/tree/main/content"
