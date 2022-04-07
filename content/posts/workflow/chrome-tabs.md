@@ -2,7 +2,7 @@
 title: Declutter Your Chrome Taskbar
 date: 2022-04-07
 author: Kyle McLester
-summary: UNDER CONSTRUCTION
+summary: Reduce the amount of active tabs taking up precious memory by using OneTab
 ---
 
 As many of you may know, Google Chrome **loves** to eat up memory. There are certainly workarounds or alternative solutions but Google Chrome has become integral to many people's daily routines. So, instead of finding a new browser or expecting Google to do something good on behalf of their users, we can use a clever extension called "OneTab". If you're anything like me and often find yourself with 20+ tabs open and are unable to actually find anything you need, this may be of use to you.
