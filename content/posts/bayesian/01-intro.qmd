@@ -11,14 +11,14 @@ execute:
 
 ## 0. Problem: Total Effect of Race on CMPD Arrests
 
-Load the data and aggregate for counts.
+Load the data and aggregate for counts. To simplify this analysis, we'll examine only one month (June, 2017). First, we'll load our data and then keep only stops with White/Black individuals as well as Reason for the stop based on certain stops.
 
 ```{r}
 library(tidyverse)
 
 df <- read_csv("Officer_Traffic_Stops.csv") %>%
-  mutate(arrest = if_else(Result_of_Stop == "Arrest", 1L, 0L)) %>%
-  sample_n(size=1000) %>%
+  mutate(arrest = if_else(Result_of_Stop %in% c("Arrest","Citation Issued"), 1L, 0L)) %>%
+  filter(Month_of_Stop == "2017/06") %>%
   filter(Driver_Race %in% c("White","Black")) %>%
   filter(Reason_for_Stop %in% c("Vehicle Regulatory","Speeding","SeatBelt","Vehicle Equipment","Stop Light/Sign","Safe Movement"))
 
@@ -216,5 +216,7 @@ df2 %>%
   coord_equal() +
   labs(x = "White Arrest Rate", y = "Black Arrest Rate",
        size = "Arrest Rate") +
-  theme(legend.position = "right")
+  theme(legend.position = "right") +
+  xlim(0,0.5) +
+  ylim(0,0.5)
 ```

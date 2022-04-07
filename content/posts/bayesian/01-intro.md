@@ -13,7 +13,10 @@ execute:
 
 ## 0. Problem: Total Effect of Race on CMPD Arrests
 
-Load the data and aggregate for counts.
+Load the data and aggregate for counts. To simplify this analysis, we'll
+examine only one month (June, 2017). First, we'll load our data and then
+keep only stops with White/Black individuals as well as Reason for the
+stop based on certain stops.
 
 ``` r
 library(tidyverse)
@@ -32,8 +35,8 @@ library(tidyverse)
 
 ``` r
 df <- read_csv("Officer_Traffic_Stops.csv") %>%
-  mutate(arrest = if_else(Result_of_Stop == "Arrest", 1L, 0L)) %>%
-  sample_n(size=1000) %>%
+  mutate(arrest = if_else(Result_of_Stop %in% c("Arrest","Citation Issued"), 1L, 0L)) %>%
+  filter(Month_of_Stop == "2017/06") %>%
   filter(Driver_Race %in% c("White","Black")) %>%
   filter(Reason_for_Stop %in% c("Vehicle Regulatory","Speeding","SeatBelt","Vehicle Equipment","Stop Light/Sign","Safe Movement"))
 ```
@@ -55,14 +58,14 @@ head(df)
 ```
 
     # A tibble: 6 × 18
-      Month_of_Stop Reason_for_Stop    Officer_Race  Officer_Gender Officer_Years_o…
-      <chr>         <chr>              <chr>         <chr>                     <dbl>
-    1 2016/07       Vehicle Equipment  White         Male                          1
-    2 2017/04       Speeding           Black/Africa… Male                          7
-    3 2017/10       Speeding           Black/Africa… Male                         16
-    4 2017/08       Vehicle Equipment  White         Male                         19
-    5 2017/01       Speeding           Asian / Paci… Male                          7
-    6 2016/10       Vehicle Regulatory White         Male                          8
+      Month_of_Stop Reason_for_Stop    Officer_Race Officer_Gender Officer_Years_of…
+      <chr>         <chr>              <chr>        <chr>                      <dbl>
+    1 2017/06       Vehicle Regulatory White        Female                         3
+    2 2017/06       Vehicle Regulatory White        Male                           2
+    3 2017/06       Stop Light/Sign    White        Male                           5
+    4 2017/06       Vehicle Equipment  White        Male                          10
+    5 2017/06       Stop Light/Sign    White        Male                           2
+    6 2017/06       Stop Light/Sign    White        Female                         3
     # … with 13 more variables: Driver_Race <chr>, Driver_Ethnicity <chr>,
     #   Driver_Gender <chr>, Driver_Age <dbl>, Was_a_Search_Conducted <chr>,
     #   Result_of_Stop <chr>, CMPD_Division <chr>, ObjectID <dbl>,
@@ -85,18 +88,18 @@ df2
     # Groups:   Driver_Race [2]
        Driver_Race Reason_for_Stop    stops arrests
        <chr>       <chr>              <int>   <int>
-     1 Black       Safe Movement         34       1
-     2 Black       SeatBelt               4       0
-     3 Black       Speeding             114       0
-     4 Black       Stop Light/Sign       45       1
-     5 Black       Vehicle Equipment     72       4
-     6 Black       Vehicle Regulatory   251       3
-     7 White       Safe Movement         18       0
-     8 White       SeatBelt               3       0
-     9 White       Speeding             149       0
-    10 White       Stop Light/Sign       48       0
-    11 White       Vehicle Equipment     41       0
-    12 White       Vehicle Regulatory   117       0
+     1 Black       Safe Movement         94      23
+     2 Black       SeatBelt              31       8
+     3 Black       Speeding             285     194
+     4 Black       Stop Light/Sign      139      31
+     5 Black       Vehicle Equipment    271      49
+     6 Black       Vehicle Regulatory   764     239
+     7 White       Safe Movement         93      30
+     8 White       SeatBelt              12       2
+     9 White       Speeding             328     207
+    10 White       Stop Light/Sign      153      38
+    11 White       Vehicle Equipment     96      12
+    12 White       Vehicle Regulatory   341     132
 
 ## 1. Scientific Model
 
@@ -120,7 +123,7 @@ StopReason -> Arrest
 plot(g)
 ```
 
-<img src="01-intro_files/figure-gfm/unnamed-chunk-6-1.png"
+<img src="/posts/bayesian/01-intro_files/figure-gfm/unnamed-chunk-6-1.png"
 width="768" />
 
 ## 2. Statistical Model
@@ -187,7 +190,7 @@ convergence as we can see in the trace plots.
 plot(m1)
 ```
 
-<img src="01-intro_files/figure-gfm/unnamed-chunk-10-1.png"
+<img src="/posts/bayesian/01-intro_files/figure-gfm/unnamed-chunk-10-1.png"
 width="768" />
 
 ## 4. Posterior Samples and Contrasts
@@ -217,7 +220,7 @@ posterior_draws %>%
   labs(x = "Black-White contrast (total", y = "Density")
 ```
 
-<img src="01-intro_files/figure-gfm/unnamed-chunk-12-1.png"
+<img src="/posts/bayesian/01-intro_files/figure-gfm/unnamed-chunk-12-1.png"
 width="768" />
 
 ## 5. Posterior Predictive Checks
@@ -231,7 +234,7 @@ bayesplot::pp_check(m1)
 
     Using 10 posterior draws for ppc type 'dens_overlay' by default.
 
-<img src="01-intro_files/figure-gfm/unnamed-chunk-14-1.png"
+<img src="/posts/bayesian/01-intro_files/figure-gfm/unnamed-chunk-14-1.png"
 width="768" />
 
 Overall, the model fits pretty well. From this very naive model, we find
@@ -341,16 +344,16 @@ summary(m2)
 plot(m2)
 ```
 
-<img src="01-intro_files/figure-gfm/unnamed-chunk-18-1.png"
+<img src="/posts/bayesian/01-intro_files/figure-gfm/unnamed-chunk-18-1.png"
 width="768" />
 
-<img src="01-intro_files/figure-gfm/unnamed-chunk-18-2.png"
+<img src="/posts/bayesian/01-intro_files/figure-gfm/unnamed-chunk-18-2.png"
 width="768" />
 
-<img src="01-intro_files/figure-gfm/unnamed-chunk-18-3.png"
+<img src="/posts/bayesian/01-intro_files/figure-gfm/unnamed-chunk-18-3.png"
 width="768" />
 
-<img src="01-intro_files/figure-gfm/unnamed-chunk-18-4.png"
+<img src="/posts/bayesian/01-intro_files/figure-gfm/unnamed-chunk-18-4.png"
 width="768" />
 
 ## 4B. Posterior Samples and Contrasts
@@ -385,7 +388,7 @@ ggplot(marg_eff, aes(x = diff)) +
   labs(x = "Difference in Arrests (Black - White)", y = "Density")
 ```
 
-<img src="01-intro_files/figure-gfm/unnamed-chunk-22-1.png"
+<img src="/posts/bayesian/01-intro_files/figure-gfm/unnamed-chunk-22-1.png"
 width="768" />
 
 ## 5B. Posterior Predictive Checks
@@ -398,7 +401,7 @@ bayesplot::pp_check(m2)
 
     Using 10 posterior draws for ppc type 'dens_overlay' by default.
 
-<img src="01-intro_files/figure-gfm/unnamed-chunk-24-1.png"
+<img src="/posts/bayesian/01-intro_files/figure-gfm/unnamed-chunk-24-1.png"
 width="768" />
 
 ## 6. Model Comparison
@@ -474,8 +477,10 @@ df2 %>%
   coord_equal() +
   labs(x = "White Arrest Rate", y = "Black Arrest Rate",
        size = "Arrest Rate") +
-  theme(legend.position = "right")
+  theme(legend.position = "right") +
+  xlim(0,0.5) +
+  ylim(0,0.5)
 ```
 
-<img src="01-intro_files/figure-gfm/unnamed-chunk-32-1.png"
+<img src="/posts/bayesian/01-intro_files/figure-gfm/unnamed-chunk-32-1.png"
 width="768" />
