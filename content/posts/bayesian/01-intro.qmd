@@ -1,0 +1,220 @@
+---
+title: "Bayesian causal inference of race on CMPD arrests"
+author: "Ryan Wesslen"
+date: 2022-04-06
+format: hugo
+categories: ['Bayesian','brms','tidybayes','rethinking']
+summary: Estimating causal effects of race on Charlotte-Mecklenburg police arrests
+execute:
+  freeze: auto
+---
+
+## 0. Problem: Total Effect of Race on CMPD Arrests
+
+Load the data and aggregate for counts.
+
+```{r}
+library(tidyverse)
+
+df <- read_csv("Officer_Traffic_Stops.csv") %>%
+  mutate(arrest = if_else(Result_of_Stop == "Arrest", 1L, 0L)) %>%
+  sample_n(size=1000) %>%
+  filter(Driver_Race %in% c("White","Black")) %>%
+  filter(Reason_for_Stop %in% c("Vehicle Regulatory","Speeding","SeatBelt","Vehicle Equipment","Stop Light/Sign","Safe Movement"))
+
+head(df)
+```
+
+```{r}
+df2 <- df %>%
+  group_by(Driver_Race,Reason_for_Stop) %>%
+  summarise(stops = n(), arrests = sum(arrest))
+
+df2
+```
+
+## 1. Scientific Model
+
+For our initial model, I used [daggity.net](http://www.dagitty.net/) to specify my Directed Acyclic Graph, or DAG. This outlines my prior assumptions of the causality paths for these variables.
+
+```{r}
+library(dagitty)
+
+g <- dagitty('dag {
+bb="0,0,1,1"
+Arrest [outcome,pos="0.641,0.606"]
+Race [exposure,pos="0.207,0.608"]
+StopReason [pos="0.465,0.242"]
+Race -> Arrest
+Race -> StopReason
+StopReason -> Arrest
+}
+')
+plot(g)
+```
+
+## 2. Statistical Model
+
+Our objective is to find the **total** causal effect of Race on arrests. With our specified DAG, we can find the corrrect adjustment set we find there is no need to control (stratify) by `StopReason` to identify the total causal effect of Race on Arrests.
+
+I can use a Binomial response where the trials will be stops and our counts are for arrests.
+
+
+```{r}
+library(brms)
+
+m1 <- brm(
+  arrests | trials(stops) ~ 0 + Driver_Race, 
+  family = binomial("logit"), 
+  prior = set_prior("normal(0,1.5)", class = "b"), 
+  data = df2, chains = 4, cores = parallel::detectCores(),
+  file = "models/m1.rds" # cache model (can be removed)  
+)
+
+summary(m1)
+```
+
+## 3. Model Diagnostics
+
+Our parameter Rhat's are near 1, which would reflect good model convergence as we can see in the trace plots.
+
+```{r}
+plot(m1)
+```
+
+## 4. Posterior Samples and Contrasts
+
+I then used `tidybayes` to get posterior samples with contrasts.
+
+```{r}
+library(tidybayes)
+
+posterior_draws <- m1 %>%
+  spread_draws(b_Driver_RaceWhite,b_Driver_RaceBlack) %>% # sample/draw posteriors
+  mutate(Contrast = inv_logit_scaled(b_Driver_RaceBlack) - inv_logit_scaled(b_Driver_RaceWhite))
+
+
+posterior_draws %>%
+  ggplot(aes(x = Contrast)) +
+  stat_halfeye(.width = c(0.67, 0.89, 0.97), fill = "#009FB7") +
+  labs(x = "Black-White contrast (total", y = "Density")
+```
+
+## 5. Posterior Predictive Checks
+
+To measure against model fit, we can use `pp_check` to examine the model's predictions against the actual data.
+
+```{r}
+bayesplot::pp_check(m1)
+```
+
+Overall, the model fits pretty well. From this very naive model, we find some causal effects of race on arrests. But assuming the DAG above, what if we want to examine only the **direct** effect of Race? 
+
+## 2B. Statistical Model
+
+```{r}
+m2 <- brm(bf(arrests | trials(stops) ~ r + s + i,
+               r ~ 0 + Driver_Race,
+               s ~ 0 + Reason_for_Stop,
+               i ~ 0 + Driver_Race:Reason_for_Stop,
+               nl = TRUE), data = df2, family = binomial,
+            prior = c(prior(normal(0, 1.5), nlpar = r),
+                      prior(normal(0, 1.5), nlpar = s),
+                      prior(normal(0, 1.5), nlpar = i)),
+            iter = 4000, warmup = 2000, chains = 4, cores = 4, seed = 1234,
+            file = "models/m2.rds" # cache model (can be removed)  
+          )
+
+summary(m2)
+```
+
+## 3B. Model Diagnostics
+
+```{r}
+plot(m2)
+```
+
+## 4B. Posterior Samples and Contrasts
+
+```{r}
+stops_per_reason <- df2 %>% 
+  group_by(Reason_for_Stop) %>% 
+  summarize(stops = sum(stops))
+
+# simulate as if all arrests are from black
+black_dat <- stops_per_reason %>% 
+  mutate(Driver_Race = "Black") %>% 
+  uncount(stops) %>% 
+  mutate(stops = 1L)
+
+# simulate as if all arrests are from white
+white_dat <- stops_per_reason %>% 
+  mutate(Driver_Race = "White") %>% 
+  uncount(stops) %>% 
+  mutate(stops = 1L)
+
+marg_eff <- bind_rows(add_epred_draws(black_dat, m2),
+                      add_epred_draws(white_dat, m2)) %>% 
+  pivot_wider(names_from = "Driver_Race", values_from = ".epred") %>% 
+  mutate(diff = Black - White)
+```
+
+```{r}
+ggplot(marg_eff, aes(x = diff)) +
+  stat_halfeye(.width = c(0.67, 0.89, 0.97), fill = "#009FB7") +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  labs(x = "Difference in Arrests (Black - White)", y = "Density")
+```
+
+## 5B. Posterior Predictive Checks
+
+Let's examine the model fit.
+
+```{r}
+bayesplot::pp_check(m2)
+```
+
+## 6. Model Comparison
+
+Given our DAG, each model provides a different type of causal effect (partial vs. total). Let's consider model fit using WAIC/PSIS sampling.
+
+```{r}
+(waic1 <- waic(m1))
+```
+
+```{r}
+(waic2 <- waic(m2))
+```
+
+```{r}
+loo_compare(waic1, waic2) 
+```
+
+## Final Analysis
+
+```{r}
+library(ggrepel)
+
+df2 %>% 
+  group_by(Reason_for_Stop) %>% 
+  summarize(white = sum(stops[which(Driver_Race == "White")]),
+            black = sum(stops[which(Driver_Race == "Black")]),
+            total_stops = sum(stops),
+            total_arrests = sum(arrests)) %>% 
+  mutate(white_pct = white / sum(white),
+         black_pct = black / sum(black),
+         arrest_pct = total_arrests / total_stops) %>% 
+  ggplot(aes(x = white_pct, y = black_pct)) +
+  geom_point(aes(size = arrest_pct, color = abs(white_pct - black_pct) > 0.01)) +
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
+  geom_label_repel(data = ~filter(.x, abs(white_pct - black_pct) > 0.01),
+                   aes(label = Reason_for_Stop),
+                   max.overlaps = Inf, nudge_y = 0.03) +
+  scale_size(breaks = seq(0.1, 0.3, by = 0.04)) +
+  scale_color_manual(values = c("black", "#009FB7")) +
+  guides(color = "none") +
+  coord_equal() +
+  labs(x = "White Arrest Rate", y = "Black Arrest Rate",
+       size = "Arrest Rate") +
+  theme(legend.position = "right")
+```
