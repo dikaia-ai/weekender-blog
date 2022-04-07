@@ -1,4 +1,4 @@
-baseURL: # INSERT SITE URL
+baseURL: https://weekenddatascientist.netlify.app/
 title: Weekend Data Scientist
 paginate: 5
 theme: PaperMod
