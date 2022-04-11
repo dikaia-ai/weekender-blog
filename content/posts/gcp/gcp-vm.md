@@ -103,4 +103,4 @@ Now select `SHUT DOWN` from the top options bar. In the resulting window type yo
 
 ## Closing
 
-If you have any questions or concerns, please feel free to reach out using the [contact page](https://kmclester.com/contact/). Please share with anyone that might find this useful!!
+If you have any questions or concerns, please feel free to reach out using the [contact page](https://weekenddatascientist.netlify.app/contact/). Please share with anyone that might find this useful!!

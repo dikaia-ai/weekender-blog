@@ -1,12 +1,9 @@
 ---
 author: Kyle McLester
-categories:
-- Github
 date: 2022-02-15
-format: hugo
-summary: Create repository and make first commit
 title: Creating a GitHub Repo
-toc-title: Table of contents
+categories: ['Github']
+summary: Create repository and make first commit
 ---
 
 GitHub is a version control system that allows users to manage and host
@@ -36,13 +33,13 @@ something similar to the image shown below. I have covered a few repo's
 and accounts that are private but you should still be able to get a
 general idea of what the main landing page looks like on GitHub.
 
-![Git Landing Page](/git-landing-page.png)
+![Git Landing Page](/posts/github/first-git/git-landing-page.png)
 
 To create a new repo, select the **New** button in the upper left hand
 portion of the screen. This will take you to a new page where you can
 fill out the information about your new repo.
 
-![Create new repo](/git-create-new.png)
+![Create new repo](/posts/github/first-git/git-create-new.png)
 
 On this page, you start by entering a repo name. This repo name will be
 used to identify your repository and is what you will use when it is
@@ -74,7 +71,7 @@ what is shown in the image below. As you can see, this page contains a
 lot of information but we will break it down to the core essentials to
 get up and running with GitHub.
 
-![Main repo page](/repo-main-page.png)
+![Main repo page](/posts/github/first-git/repo-main-page.png)
 
 To begin adding files, we first need to save this repository to our
 local machine. Note - you can upload files by using the `Add file`
@@ -106,7 +103,7 @@ project (see image below).
 Once this is complete, you should see your repo folder appear in your
 directory. Now cd into the repo folder.
 
-![GitHub clone directory](/git-clone.png)
+![GitHub clone directory](/posts/github/first-git/git-link.png)
 
 ## Adding Files to Repository
 
@@ -124,7 +121,7 @@ touch test.py
 nano test.py
 ```
 
-![test.py contents](/nano-test.png)
+![test.py contents](/posts/github/first-git/nano-test.png)
 
 For this example, I use the built-in nano editor but you can use any IDE
 or text editor you like to create this file. Contrary to what many
@@ -144,7 +141,7 @@ git add .
 We can check to make sure our changes have been added by returning the
 status of our git repo.
 
-![git status](/git-status.png)
+![git status](/posts/github/first-git/git-status.png)
 
 Notice how the output shows that we have staged changes for our new file
 called **test.py**. At this point, if we changed our mind and no longer
@@ -185,7 +182,7 @@ iterations of a project without having to over-write old editions.
 
 You should now be able to see your new file as shown below.
 
-![GitHub file uploaded](/git-new-file.png)
+![GitHub file uploaded](/posts/github/first-git/git-new-file.png)
 
 ## Configuring Authentication
 
@@ -220,7 +217,8 @@ git config --global credential.help store
             your terminal but this is normal
 
 If you would like to use SSH to connect to repositories, see my other
-post: [Git SSH Integration](https://kmclester.com/posts/github/git-ssh/)
+post: [Git SSH
+Integration](https://weekenddatascientist.netlify.app/posts/github/git-ssh/)
 
 ## TL;DR
 
