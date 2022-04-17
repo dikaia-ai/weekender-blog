@@ -5,6 +5,8 @@ author: Kyle McLester
 summary: Creating your first conversational ai assistant using Rasa Open Source
 ---
 
+![RASA logo](/posts/rasa/create-chatbot/rasa-logo.png)
+
 [Rasa](https://rasa.com/) is an open source platform that allows you to create enterprise-level chat assistants. You may have experience with simple rule-based dialogue systems, however; Rasa takes it one step further by using NLP and NLU to understand the context in which user utterances are provided, and execute some function based on this given input.
 
 The theory behind why you would want to create an automated chatbot vs speaking to a live agent is an entirely different discussion...there are definitely many opinions on this.
@@ -29,7 +31,7 @@ For more detailed information, I suggest checking out Rasa's [YouTube channel](h
    source $ENV_NAME/bin/activate
    ```
 
-   For more info, see related post: [Python Virtual Environments](https://kmclester.com/posts/python/venv/)
+   For more info, see related post: [Python Virtual Environments](https://weekenddatascientist.netlify.app/posts/python/venv/)
 
 3. Create git repository in project folder and add your virtual environment to .gitignore (optional)
 
@@ -128,7 +130,7 @@ The `-m models` in the above code is explicitly telling Rasa to check our models
 
 You should see something similar to the image below show up in your terminal. Now you can begin talking to your chatbot!
 
-![rasa shell example](/posts/rasa/rasa-shell.png)
+![rasa shell example](/posts/rasa/create-chatbot/rasa-shell.png)
 
 You can also run Rasa in a server configuration using the following command:
 
@@ -311,4 +313,4 @@ Intents and Entities are something you will work with very often in the Rasa eco
 
 This should at least get you started and give you a base-level understanding of Rasa and its components. There will likely be more parts to follow - my goal is to cover nearly all of Rasa's documentation in the coming weeks.
 
-In the mean time, if you have any questions or concerns, please reach out through the [contact page](https://kmclester.com/contact/).
+In the mean time, if you have any questions or concerns, please reach out through the [contact page](https://weekenddatascientist.netlify.app/contact/).

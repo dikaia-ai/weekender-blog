@@ -4,7 +4,6 @@ date: 2022-02-08
 format: hugo
 summary: Integrate Quarto to your Hugo website
 title: How to Quarto
-toc-title: Table of contents
 ---
 
 Head to the **[Get Started](https://quarto.org/docs/getting-started/)**
@@ -16,7 +15,7 @@ running this command:
 quarto check install
 ```
 
-![check-install](/quarto-check-install.png)
+![check-install](/posts/quarto/quarto-check-install.png)
 
 ## Hugo Integration
 
@@ -24,8 +23,8 @@ Once you have verified your installation, you can head over to your
 project folder. Start by editing your site configuration file
 (config.toml) by adding the following parameters:
 
-``` toml
-ignoreFiles = [ "\\.qmd$", "\\.ipynb$" ]
+```toml
+ignoreFiles = [ "\.qmd$", "\.ipynb$" ]
 
 [markup.goldmark.renderer]
     unsafe = true

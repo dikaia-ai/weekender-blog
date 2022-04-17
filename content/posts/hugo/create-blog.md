@@ -31,7 +31,7 @@ Note: The Hugo [documentation](https://gohugo.io/getting-started/quick-start/) g
 using a macOS system so I am unable to definitively explain the install process on other
 operating systems. Once you have the installation completed, all of the following steps
 will be identical, regardless of operating system. If you have questions, feel free to
-reach out using the [contact page](https://kmclester.com/contact/) and I will do my best
+reach out using the [contact page](https://weekenddatascientist.netlify.app/contact/) and I will do my best
 to respond.
 
 ### Step 1: Version Control
@@ -39,7 +39,7 @@ to respond.
 It is highly recommended to use a version control system for keeping up with changes to
 your website and it is required if you would like to host your site on a service like
 [Netlify](https://www.netlify.com/). If you do not already know how to use GitHub, please
-read through my post on setting up your [first repository](https://kmclester.com/posts/github/first-git/).
+read through my post on setting up your [first repository](https://weekenddatascientist.netlify.app/posts/github/first-git/).
 
 ### Step 2: Installation
 
@@ -125,7 +125,7 @@ I am using the [PaperMod theme](https://github.com/adityatelange/hugo-PaperMod),
 
 2. Next, we must alter the sites `config.yml` to use this new theme. The config file allows us to take advantage of the features that come bundled with the theme - and by setting certain variables, we can activate or modify these features. Below is an example of how I have my config setup but this is not the only way to do it, as you may need more or less features than I do. I strongly suggest checking if your theme has an example config file on the GitHub page that you downloaded the theme from.
 
-    - This is going to be a lot of text - [skip to next step ⬇️](https://kmclester.com/posts/hugo/create-blog/#serve-hugo-site-locally)
+    - This is going to be a lot of text - [skip to next step ⬇️](https://weekenddatascientist.netlify.app/posts/hugo/create-blog/#serve-hugo-site-locally)
 
 ```yaml
 baseURL: "https://kmclester.com/" # NOTE: include only if you have a custom domain
@@ -258,7 +258,7 @@ Open the project directory in your favorite text editor or IDE - I'm using VS Co
 
 With this in mind, you can begin creating your own webpages.
 
-Feel free to delete the included posts and begin making your own. Just remember, we are using markdown so you will need to create a new file with the `.md` file extension. Once you've created your file, you will need to set the pages ["front matter"](https://gohugo.io/content-management/front-matter/). The front matter is what allows you to attach meta data to your posts, as well as alter the configuration of a page. This is going to vary from theme to theme but I tend to use this for my pages:
+Feel free to delete the included posts and begin making your own. Just remember, we are using markdown so you will need to create a new file with the `.md` file extension. Once you've created your file, you will need to set the pages [front matter](https://gohugo.io/content-management/front-matter/). The front matter is what allows you to attach meta data to your posts, as well as alter the configuration of a page. This is going to vary from theme to theme but I tend to use this for my pages:
 
 ```yaml
 ---
@@ -280,7 +280,7 @@ summary: Creating Your First Hugo Site
 
 Note - the three dashes above and below the front matter are formatted for yaml code. Which symbol to use depends on the format of your config file. If you are using toml, you would use `+++` and json uses `{ }`.
 
-The front matter should be followed by a single new line and then your content. Checkout [my github of this page](https://github.com/kmcleste/personal-blog/blob/main/content/posts/hugo/create-blog.md) to see further example of how to format your markdown file(s).
+The front matter should be followed by a single new line and then your content. Checkout [my github of this page](https://github.com/dikaia-ai/weekender-blog/blob/main/content/posts/hugo/create-blog.md) to see further example of how to format your markdown file(s).
 
 ## Hosting with Netlify
 
@@ -312,4 +312,4 @@ Once you have logged in, you should be greeted with a dashboard with the option 
 
 ## Closing
 
-Congrats on making it this far. If you have any questions or concerns, please feel free to reach out using the [contact page](https://kmclester.com/contact/). Please share with anyone that might find this useful!!
+Congrats on making it this far. If you have any questions or concerns, please feel free to reach out using the [contact page](https://weekenddatascientist.netlify.app/contact/). Please share with anyone that might find this useful!!

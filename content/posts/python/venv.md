@@ -123,4 +123,4 @@ For further reading, I would suggest looking at [this post from Peter Baumgartne
 
 ## Closing
 
-Thanks for reading. Please reach out through the [contact page](https://kmclester.com/contact/) if you have any questions or concerns - I really appreciate feedback. Also, share this with anyone who might find it useful!
+Thanks for reading. Please reach out through the [contact page](https://weekenddatascientist.netlify.app/contact/) if you have any questions or concerns - I really appreciate feedback. Also, share this with anyone who might find it useful!

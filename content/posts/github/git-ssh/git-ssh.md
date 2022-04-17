@@ -3,7 +3,6 @@ author: Kyle McLester
 categories:
 - GitHub
 date: 2022-02-15
-format: hugo
 summary: Secure git repo connection with SSH
 title: GitHub SSH
 toc-title: Table of contents
@@ -16,7 +15,7 @@ it's done.
 
 ## Creating SSH Key
 
-1.  First, we must check if an SSH key already exists. You can do so by
+1. First, we must check if an SSH key already exists. You can do so by
     running:
 
 ``` bash

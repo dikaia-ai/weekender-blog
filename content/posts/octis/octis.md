@@ -1,17 +1,20 @@
 ---
-author: Kyle McLester
-bibliography: /Users/kmclester/Documents/my-blog/myblog/static/octis.bib
-categories:
-- Topic Modeling
-date: 2022-02-09
-format: hugo
-jupyter: python3
-summary: Optimizing and Comparing Topic Models is Simple!
 title: Intro to OCTIS
-toc-title: Table of contents
+summary: Optimizing and Comparing Topic Models is Simple!
+date: "2022-02-09"
+author: Kyle McLester
+format: hugo
+bibliography: /Users/kmclester/Documents/weekender-blog/content/posts/octis/octis.bib
+jupyter: python3
+categories: ["Topic Modeling"]
+freeze: auto
 ---
 
+
+
 **[OCTIS GitHub](https://github.com/MIND-Lab/OCTIS)**
+
+![OCTIS logo](/posts/octis/octis-logo.png)
 
 OCTIS or "Comparing and Optimizing Topic Models is Simple" was created
 by a team in Italy to assist with training, analyzing, and comparing
@@ -91,7 +94,7 @@ OCTIS follows the general framework shown below. These pipelines are
 setup for ease of use but also repeatability. Understanding this
 workflow is key to being successful with OCTIS.
 
-![OCTIS workflow](/octis-workflow.png)
+![OCTIS workflow](/posts/octis/octis-workflow.png)
 
 ### Pre-processing
 
@@ -179,15 +182,13 @@ uncertainty in the posterior to guide the exploration." (Terragni et al.
 2021)
 
 ![Comparison between OCTIS and well known topic modeling
-libraries](/octis-optimization.png)
+libraries](/posts/octis/octis-optimization.png)
 
 ------------------------------------------------------------------------
 
 ## OCTIS in Action
 
 ### [LDA Example](https://colab.research.google.com/github/MIND-Lab/OCTIS/blob/master/examples/OCTIS_LDA_training_only.ipynb)
-
-<div class="cell" execution_count="1">
 
 ``` python
 # Import dependencies
@@ -197,28 +198,16 @@ from octis.evaluation_metrics.diversity_metrics import TopicDiversity
 from octis.evaluation_metrics.coherence_metrics import Coherence
 ```
 
-</div>
-
-<div class="cell" execution_count="2">
-
 ``` python
 # Define dataset
 dataset = Dataset()
 dataset.fetch_dataset("20NewsGroup")
 ```
 
-</div>
-
-<div class="cell" execution_count="3">
-
 ``` python
 # Create Model
 model = LDA(num_topics=20, alpha=0.1)
 ```
-
-</div>
-
-<div class="cell" execution_count="4">
 
 ``` python
 # Train the model using default partition choice
@@ -227,52 +216,36 @@ output = model.train_model(dataset)
 print(*list(output.keys()), sep="\n") # Print the output identifiers
 ```
 
-<div class="cell-output-stdout">
-
     topic-word-matrix
     topics
     topic-document-matrix
     test-topic-document-matrix
-
-</div>
-
-</div>
-
-<div class="cell" execution_count="5">
 
 ``` python
 # Return the generated topics
 [' '.join(x) for x in output['topics']]
 ```
 
-<div class="cell-output-display" execution_count="5">
-
-    ['woman son church kill body wife people mother leave start',
-     'government state people law information group issue military make control',
-     'file image program version application include widget system window server',
-     'people make give sin day time man life love good',
-     'list print program port computer printer include work address color',
-     'people religion make thing belief time christian question point church',
-     'car good make price engine mile power buy water sell',
-     'encryption chip clipper key system government technology law year escrow',
-     'time phone people ground happen start make hear leave put',
-     'question drive monitor power system apple post newsgroup answer gay',
-     'game team win play year good player time season make',
-     'drive card disk run work system driver scsi make chip',
-     'drug test patient disease doctor medical study problem good card',
-     'make fire claim people evidence point reason post word case',
-     'window problem work mode run block bit switch button memory',
-     'armenian people turkish year genocide population jewish village greek war',
-     'key mail send number message post info call reply company',
-     'homosexual man sex homosexuality male sexual cap make pen show',
-     'gun law weapon people firearm car good death pay kill',
-     'space launch system cost mission satellite orbit solar make year']
-
-</div>
-
-</div>
-
-<div class="cell" execution_count="6">
+    ['file image program version system include software color display widget',
+     'key government system law chip people security make clipper enforcement',
+     'armenian turkish israeli village attack kill russian genocide people government',
+     'gun weapon firearm fire tank cop control bill military state',
+     'test make time pray people money give talk car power',
+     'post mail send message group list address email newsgroup people',
+     'sell good price sale offer make problem include condition mail',
+     'bike buy ride good engine cost make tire motorcycle work',
+     'disease system year research program rate report service datum high',
+     'encryption phone chip government clipper technology device agency information time',
+     'computer include information ground modem electronic price network correction software',
+     'game team win year play good player time make season',
+     'window problem work application run print program font error time',
+     'people make time man year child law give day call',
+     'water launch time year back body side day start leave',
+     'space book design good system point year time plane interested',
+     'card drive driver scsi system problem work speed bus bit',
+     'evidence claim true good time science make question people objective',
+     'car drug dealer criminal state day problem illegal property find',
+     'belief church atheist faith question thing point make human exist']
 
 ``` python
 # Initialize performance metric
@@ -281,10 +254,6 @@ npmi = Coherence(texts=dataset.get_corpus(), topk=10, measure='c_npmi')
 # Initialize performance metric
 topic_diversity = TopicDiversity(topk=10)
 ```
-
-</div>
-
-<div class="cell" execution_count="7">
 
 ``` python
 # Retrieve metric scores
@@ -295,19 +264,9 @@ npmi_score = npmi.score(output)
 print(f'Coherence: {str(npmi_score)}')
 ```
 
-<div class="cell-output-stdout">
+    Topic diversity: 0.72
 
-    Topic diversity: 0.725
-
-</div>
-
-<div class="cell-output-stdout">
-
-    Coherence: 0.07167448455491789
-
-</div>
-
-</div>
+    Coherence: 0.06585295311548674
 
 **NOTE**: For a neural-based example, see the [Google
 Colab](https://colab.research.google.com/github/MIND-Lab/OCTIS/blob/master/examples/OCTIS_Optimizing_CTM.ipynb)

@@ -10,4 +10,5 @@ tags:
     - word2vec
     - vectorization
 summary: 🚧 UNDER CONSTRUCTION - A bried history and explanation of word embeddings, their application, and alternatives
+draft: true
 ---

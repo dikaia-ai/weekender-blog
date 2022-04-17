@@ -4,12 +4,15 @@ summary: Optimizing and Comparing Topic Models is Simple!
 date: "2022-02-09"
 author: Kyle McLester
 format: hugo
-bibliography: /Users/kmclester/Documents/my-blog/myblog/static/octis.bib
+bibliography: /Users/kmclester/Documents/weekender-blog/content/posts/octis/octis.bib
 jupyter: python3
 categories: ["Topic Modeling"]
+freeze: auto
 ---
 
 **[OCTIS GitHub](https://github.com/MIND-Lab/OCTIS)**
+
+![OCTIS logo](/posts/octis/octis-logo.png)
 
 OCTIS or "Comparing and Optimizing Topic Models is Simple" was created by a team in Italy to assist with training, analyzing, and comparing topic models [@terragni-etal-2021-octis]. They intend for OCTIS to be used by researchers to aid in comparing models of interest; which are scored using benchmark datasets and well-known evalutation metrics. Assuming wide adoption, it would make comparing research teams results' much easier as everyone would be using the same testing methodology.
 
@@ -47,7 +50,7 @@ LDA is great; people think neural nets are cool; new isn't always better but som
 
 OCTIS follows the general framework shown below. These pipelines are setup for ease of use but also repeatability. Understanding this workflow is key to being successful with OCTIS.
 
-![OCTIS workflow](/octis-workflow.png)
+![OCTIS workflow](/posts/octis/octis-workflow.png)
 
 ### Pre-processing
 
@@ -110,7 +113,7 @@ selected through the optimization of an acquisition
 function, which leverages the uncertainty in the
 posterior to guide the exploration." [@terragni-etal-2021-octis]
 
-![Comparison between OCTIS and well known topic modeling libraries](/octis-optimization.png)
+![Comparison between OCTIS and well known topic modeling libraries](/posts/octis/octis-optimization.png)
 
 ---
 
