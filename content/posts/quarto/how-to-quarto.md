@@ -6,7 +6,7 @@ summary: Integrate Quarto to your Hugo website
 title: How to Quarto
 ---
 
-Head to the **[Get Started](https://quarto.org/docs/getting-started/)**
+Head to the **[Get Started](https://quarto.org/docs/get-started/)**
 page on Quarto's website and download the latest version of Quarto for
 your operating system. You can verify your installation is working by
 running this command:
