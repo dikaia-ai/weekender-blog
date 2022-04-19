@@ -26,4 +26,27 @@ git submodule update --init --recursive # needed when you reclone your repo (sub
 git submodule update --remote --merge
 ```
 
+## Creating Posts
 
+Please try to maintain the current folder structure. If you would like to upload a post that is related to a pre-existing category, simply create a new directory within the appropriate `./content/posts/<category_name>/` folder. To upload a post that does not fit any of the current categories, create a new directory in `./content/posts/` with the folder name being the desired category. Then, create a subdirectory for your post in the newly created category folder (see current structure for clearity).
+
+When creating a new post, please include the following frontmatter as the first item in your markdown file:
+
+```yaml
+---
+title: "Descriptive Title"
+author: "Your Name"
+date: YYYY-MM-DD
+categories: ['Category_01','Category_02',...,'Category_n']
+tags: ['tag_01', 'tag_02', ... , 'tag_n']
+summary: "Brief but descriptive summary of blog post"
+format: hugo
+execute:
+  freeze: auto
+---
+```
+
+**Note**
+- Capitalize the first letter of categories and use lowercase for tags
+- The "format" and "execute" parameters are only needed if you are executing code with Quarto
+- Include any additional files needed for your post in the posts' directory
