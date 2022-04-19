@@ -26,4 +26,22 @@ git submodule update --init --recursive # needed when you reclone your repo (sub
 git submodule update --remote --merge
 ```
 
+## Creating Posts
 
+When creating a new post, please include the following frontmatter as the first item in your markdown file:
+
+```yaml
+---
+title: "Descriptive Title"
+author: "Your Name"
+date: YYYY-MM-DD
+categories: ['Category_01','Category_02',...,'Category_n']
+tags: ['tag_01', 'tag_02', ... , 'tag_n']
+summary: "Brief but descriptive summary of blog post"
+format: hugo
+execute:
+  freeze: auto
+---
+```
+
+Capitalize the first letter of categories and use lowercase for tags. Also, the "format" and "execute" parameters are only needed if you are executing code with Quarto.
