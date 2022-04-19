@@ -62,8 +62,7 @@ params:
 
     homeInfoParams:
         Title: "Welcome!"
-        Content: >
-            # INSERT WELCOME MESSAGE CONTENT
+        # Content: >
 
     socialIcons:
         - name: github
