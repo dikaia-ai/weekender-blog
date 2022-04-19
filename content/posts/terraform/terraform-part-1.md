@@ -154,7 +154,8 @@ You can change your example configuration to provision more mock resources. See 
 
 1. Try pasting this code in *main.tf* to add a few more servers.
     
-    `resource "fakewebservices_server" "server-3" {
+    ```console
+    resource "fakewebservices_server" "server-3" {
       name = "Server 3"
       type = "t2.macro"
     }
@@ -162,7 +163,8 @@ You can change your example configuration to provision more mock resources. See 
     resource "fakewebservices_server" "server-4" {
       name = "Server 4"
       type = "t2.macro"
-    }`
+    }
+    ```
     
 2. Re-run `terraform apply` and view the changes on this page.
 
